@@ -6,7 +6,7 @@ function Obstacle(img, x, y, speed) {
 }
 
 Obstacle.prototype.update = function() {
-	this.y -= this.speed;
+	this.y += this.speed;
 };
 
 Obstacle.prototype.draw = function() {
