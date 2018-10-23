@@ -1,10 +1,14 @@
-function Player(x, y, speed) {
+function Player(x, y, w, h, speed) {
 	this.x = x;
 	this.y = y;
+	this.w = w;
+	this.h = h;
 	this.speed = speed;
 
 	this.canJump = true;
 	this.jumping = false;
+
+	this.health = 100;
 }
 
 Player.prototype.ableToJump = function() {
@@ -25,13 +29,21 @@ Player.prototype.update = function() {
 	}
 };
 
-Player.prototype.collide = function() {
+Player.prototype.collide = function(obj) {
+	if (!(this.y > obj.y + obj.h || obj.y > this.y + this.h)) {
+		if (!(this.x > obj.x + obj.w || obj.x > this.x + this.w)) {
+			if (!this.jumping) {
+				return true;
+			}
+		}
+	}
 
+	return false;
 };
 
 Player.prototype.draw = function() {
 	//image(playerImg, this.x, this.y, 75, 75);
 	fill(0);
 	noStroke();
-	rect(this.x, this.y, 50, 50);
+	rect(this.x, this.y, this.w, this.h);
 };

@@ -18,18 +18,18 @@ function preload() {
 function setup() {
 	createCanvas(800, 800);
 
-	player = new Player(300, 600, 3);
+	player = new Player(300, 600, 50, 50, 3);
 
 	/* Buttons */
 	buttons.push(new Button(width/2, height/2, 200, 100, 60, "PLAY", "game"));
 
 	/* Obstacle Types */
-	obstacleTypes.push([chair, random(width - 50), random(0, height-50), 5]);
+	obstacleTypes.push([chair, random(width - 50), random(-400, -50), 50, 50, 5, 1]); // img, x, y, w, h, speed, damage
 
 	/* Obstacles */
 	for (let i = 0; i < 10; i ++) {
 		let oType = random(obstacleTypes);
-		obstacles.push(new Obstacle(oType[0], oType[1], oType[2], oType[3]));
+		obstacles.push(new Obstacle(oType[0], oType[1], oType[2], oType[3], oType[4], oType[5], oType[6]));
 	}
 
 	scene = "menu";
@@ -62,11 +62,20 @@ function game() {
 	player.draw();
 	player.update();
 
-	for (let i = 0; i < obstacles.length; i ++) {
+	fill(51, 10, 4);
+	textSize(30);
+	text("Health: " + player.health, 150, 50);
+
+	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
 
 		o.draw();
 		o.update();
+
+		if (player.collide(o)) {
+			player.health -= o.damage;
+			obstacles.splice(i, 1);
+		}
 	}
 }
 
