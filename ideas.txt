@@ -1,0 +1,8 @@
+You are running away from a blazing fire behind you.
+
+Top-down view.
+
+Controls:
+a/left arrow = left
+d/right arrow = right
+w/space/up arrow = jump
