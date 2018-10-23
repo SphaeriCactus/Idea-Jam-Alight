@@ -12,7 +12,7 @@ let obstacles = [];
 let chair;
 
 function preload() {
-	chair = loadImage("assets/chair.png");
+	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 }
 
 function setup() {

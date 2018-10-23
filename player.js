@@ -33,5 +33,5 @@ Player.prototype.draw = function() {
 	//image(playerImg, this.x, this.y, 75, 75);
 	fill(0);
 	noStroke();
-	rect(this.x, this.y, 75, 75);
+	rect(this.x, this.y, 50, 50);
 };
