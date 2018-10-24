@@ -10,6 +10,7 @@ let obstacleTypes = [];
 let obstacles = [];
 
 let chair;
+let spawner;
 
 function preload() {
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
@@ -24,12 +25,12 @@ function setup() {
 	buttons.push(new Button(width/2, height/2, 200, 100, 60, "PLAY", "game"));
 
 	/* Obstacle Types */
-	obstacleTypes.push([chair, random(width - 50), random(-400, -50), 50, 50, 5, 1]); // img, x, y, w, h, speed, damage
+	obstacleTypes.push([chair, 50, 50, 5, 5]); // img, w, h, speed, damage
 
 	/* Obstacles */
-	for (let i = 0; i < 10; i ++) {
+	for (let i = 0; i < 5; i ++) {
 		let o = random(obstacleTypes);
-		obstacles.push(new Obstacle(o[0], o[1], o[2], o[3], o[4], o[5], o[6]));
+		obstacles.push(new Obstacle(o[0], random(width - 50), random(-400, -50), o[1], o[2], o[3], o[4]));
 	}
 
 	scene = "menu";
@@ -46,6 +47,12 @@ function keyPressed() {
 }
 function keyReleased() {
 	keys[keyCode] = false;
+}
+
+/* Functions */
+function spawnObstacle() {
+	let o = random(obstacleTypes);
+	obstacles.push(new Obstacle(o[0], random(width - 50), random(-400, -50), o[1], o[2], o[3], o[4]));
 }
 
 /* Scenes */
@@ -76,7 +83,13 @@ function game() {
 			player.health -= o.damage;
 			obstacles.splice(i, 1);
 		}
+
+		if (o.y > height) {
+			obstacles.splice(i, 1);
+		}
 	}
+
+	spawner = setInterval(spawnObstacle, 3000);
 }
 
 function draw() {
