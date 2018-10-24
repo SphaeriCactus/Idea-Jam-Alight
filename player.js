@@ -16,9 +16,9 @@ Player.prototype.ableToJump = function() {
 };
 
 Player.prototype.update = function() {
-	if (keys[LEFT_ARROW]) {
+	if (keys[LEFT_ARROW] && this.x >= this.speed) {
 		this.x -= this.speed;
-	} else if (keys[RIGHT_ARROW]) {
+	} else if (keys[RIGHT_ARROW] && this.x <= (width - this.w - this.speed)) {
 		this.x += this.speed;
 	}
 

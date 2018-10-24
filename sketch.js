@@ -18,7 +18,7 @@ function preload() {
 function setup() {
 	createCanvas(800, 800);
 
-	player = new Player(300, 600, 50, 50, 3);
+	player = new Player(300, 600, 50, 50, 5);
 
 	/* Buttons */
 	buttons.push(new Button(width/2, height/2, 200, 100, 60, "PLAY", "game"));
@@ -28,8 +28,8 @@ function setup() {
 
 	/* Obstacles */
 	for (let i = 0; i < 10; i ++) {
-		let oType = random(obstacleTypes);
-		obstacles.push(new Obstacle(oType[0], oType[1], oType[2], oType[3], oType[4], oType[5], oType[6]));
+		let o = random(obstacleTypes);
+		obstacles.push(new Obstacle(o[0], o[1], o[2], o[3], o[4], o[5], o[6]));
 	}
 
 	scene = "menu";
