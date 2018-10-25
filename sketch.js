@@ -11,6 +11,7 @@ let obstacles = [];
 
 let chair;
 let fr, interval, counter, obstacleAmmount;
+let score;
 
 function preload() {
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
@@ -35,6 +36,8 @@ function setup() {
 	interval = 1.5;
 	counter = 0;
 	obstacleAmmount = 5;
+
+	score = 0;
 
 	scene = "menu";
 
@@ -72,7 +75,11 @@ function menu() {
 }
 
 function story() {
+	background(235);
+}
 
+function gameOver() {
+	background(235);
 }
 
 function game() {
@@ -83,7 +90,10 @@ function game() {
 
 	fill(51, 10, 4);
 	textSize(30);
-	text("Health: " + player.health, 150, 50);
+	textAlign(LEFT, CENTER);
+	text("Health: " + player.health, 25, 50);
+	text("Score: " + score, 25, 100);
+	textAlign(CENTER, CENTER);
 
 	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
@@ -98,6 +108,7 @@ function game() {
 
 		if (o.y > height) {
 			obstacles.splice(i, 1);
+			score ++;
 		}
 	}
 
@@ -112,6 +123,10 @@ function game() {
 	if (counter >= 2000) {
 		interval = 0.75;
 		console.log("Level 3");
+	}
+
+	if (player.health <= 0) {
+		scene = "game over";
 	}
 
 	counter ++;
@@ -129,6 +144,9 @@ function draw() {
 			break;
 		case "game":
 			game();
+			break;
+		case "game over":
+			gameOver();
 			break;
 	}
 
