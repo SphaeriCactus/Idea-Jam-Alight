@@ -23,6 +23,7 @@ function setup() {
 
 	/* Buttons */
 	buttons.push(new Button(width/2, height/2, 200, 100, 60, "PLAY", "game"));
+	buttons.push(new Button(width/2, height/2 + height/4, 200, 100, 50, "STORY", "story"));
 
 	/* Obstacle Types */
 	obstacleTypes.push([chair, 50, 50, 5, 5]); // img, w, h, speed, damage
@@ -64,6 +65,13 @@ function menu() {
 
 	buttons[0].draw();
 	buttons[0].update();
+
+	buttons[1].draw();
+	buttons[1].update();
+}
+
+function story() {
+
 }
 
 function game() {
@@ -111,6 +119,9 @@ function draw() {
 	switch (scene) {
 		case "menu":
 			menu();
+			break;
+		case "story":
+			story();
 			break;
 		case "game":
 			game();
