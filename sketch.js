@@ -89,7 +89,9 @@ function game() {
 		}
 	}
 
-	spawner = setInterval(spawnObstacle, 3000);
+	if (frameCount % (frameRate * 2)) {
+		spawnObstacle();
+	}
 }
 
 function draw() {
