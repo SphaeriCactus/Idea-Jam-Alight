@@ -10,7 +10,7 @@ let obstacleTypes = [];
 let obstacles = [];
 
 let chair;
-let fr, interval, counter;
+let fr, interval, counter, obstacleAmmount;
 
 function preload() {
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
@@ -34,6 +34,7 @@ function setup() {
 	fr = 60;
 	interval = 1.5;
 	counter = 0;
+	obstacleAmmount = 5;
 
 	scene = "menu";
 
@@ -101,13 +102,16 @@ function game() {
 	}
 
 	if (frameCount % (fr * interval) === 0) {
-		spawnObstacles(5);
+		spawnObstacles(obstacleAmmount);
 	}
 
 	if (counter >= 1000) {
 		interval = 1;
-	} else if (counter >= 2000) {
-		interval = 0.5;
+		obstacleAmmount = 6;
+	}
+	if (counter >= 2000) {
+		interval = 0.75;
+		console.log("Level 3");
 	}
 
 	counter ++;
