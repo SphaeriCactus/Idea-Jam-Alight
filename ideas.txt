@@ -6,3 +6,7 @@ Controls:
 a/left arrow = left
 d/right arrow = right
 w/space/up arrow = jump
+
+Game over scene:
+flame background
+display score

@@ -85,9 +85,6 @@ function gameOver() {
 function game() {
 	background(235);
 
-	player.draw();
-	player.update();
-
 	fill(51, 10, 4);
 	textSize(30);
 	textAlign(LEFT, CENTER);
@@ -111,6 +108,9 @@ function game() {
 			score ++;
 		}
 	}
+
+	player.draw();
+	player.update();
 
 	if (frameCount % (fr * interval) === 0) {
 		spawnObstacles(obstacleAmmount);

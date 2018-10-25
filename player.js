@@ -22,8 +22,9 @@ Player.prototype.update = function() {
 		this.x += this.speed;
 	}
 
-	if (keys[32] && this.canJump) {
+	if ((keys[32] || keys[UP_ARROW]) && this.canJump) {
 		console.log("jump");
+		this.jumping = true;
 		this.canJump = false;
 		setTimeout(this.ableToJump(), 1000);
 	}
