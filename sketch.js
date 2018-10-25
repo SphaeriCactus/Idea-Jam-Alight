@@ -10,7 +10,7 @@ let obstacleTypes = [];
 let obstacles = [];
 
 let chair;
-let spawner;
+let fr, interval, counter;
 
 function preload() {
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
@@ -28,10 +28,11 @@ function setup() {
 	obstacleTypes.push([chair, 50, 50, 5, 5]); // img, w, h, speed, damage
 
 	/* Obstacles */
-	for (let i = 0; i < 5; i ++) {
-		let o = random(obstacleTypes);
-		obstacles.push(new Obstacle(o[0], random(width - 50), random(-400, -50), o[1], o[2], o[3], o[4]));
-	}
+	spawnObstacles(5);
+
+	fr = 60;
+	interval = 1.5;
+	counter = 0;
 
 	scene = "menu";
 
@@ -50,9 +51,11 @@ function keyReleased() {
 }
 
 /* Functions */
-function spawnObstacle() {
-	let o = random(obstacleTypes);
-	obstacles.push(new Obstacle(o[0], random(width - 50), random(-400, -50), o[1], o[2], o[3], o[4]));
+function spawnObstacles(ammount) {
+	for (let i = 1; i <= ammount; i ++) {
+		let o = random(obstacleTypes);
+		obstacles.push(new Obstacle(o[0], random(width - o[1]), random(-400, (o[2] * -1)), o[1], o[2], o[3], o[4]));
+	}
 }
 
 /* Scenes */
@@ -89,9 +92,17 @@ function game() {
 		}
 	}
 
-	if (frameCount % (frameRate * 2)) {
-		spawnObstacle();
+	if (frameCount % (fr * interval) === 0) {
+		spawnObstacles(5);
 	}
+
+	if (counter >= 1000) {
+		interval = 1;
+	} else if (counter >= 2000) {
+		interval = 0.5;
+	}
+
+	counter ++;
 }
 
 function draw() {
