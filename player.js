@@ -54,10 +54,6 @@ Player.prototype.collide = function(obj) {
 };
 
 Player.prototype.draw = function() {
-	//imageMode(CENTER);
-	//image(playerImg, this.x, this.y, 75, 75);
-	rectMode(CENTER);
-	fill(0);
-	noStroke();
-	rect(this.x, this.y, this.s, this.s);
+	imageMode(CENTER);
+	image((this.health > 50 ? playerImg : playerImg2), this.x, this.y, this.s, this.s);
 };

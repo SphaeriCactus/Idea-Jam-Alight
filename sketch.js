@@ -4,17 +4,21 @@ let keys = [];
 let scene;
 let buttons = [];
 
-let playerImg;
+let playerImg, playerImg2;
 
 let obstacleTypes = [];
 let obstacles = [];
 
-let chair;
+let chair, flowers, laptop;
 let fr, interval, counter, obstacleAmmount;
 let score;
 
 function preload() {
+	playerImg = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player.png");
+	playerImg2 = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player2.png");
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
+	//flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
+	//laptop = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/laptop.png");
 }
 
 function setup() {
@@ -31,6 +35,8 @@ function setup() {
 	/* Obstacle Types */
 	// img, w, h, speed, damage
 	obstacleTypes.push([chair, 50, 50, 5, 5]);
+	//obstacleTypes.push([flowers, 60, 60, 5, 10]);
+	//obstacleTypes.push([laptop, 40, 40, 5, 2]);
 
 	/* Obstacles */
 	spawnObstacles(5);
@@ -88,6 +94,7 @@ function game() {
 	background(235);
 
 	fill(51, 10, 4);
+	noStroke();
 	textSize(30);
 	textAlign(LEFT, CENTER);
 	text("Health: " + player.health, 25, 50);
