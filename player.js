@@ -42,8 +42,8 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.collide = function(obj) {
-	if (!(this.y - this.s/2 > obj.y + obj.h || obj.y > this.y + this.s/2)) {
-		if (!(this.x - this.s/2 > obj.x + obj.w || obj.x > this.x + this.s/2)) {
+	if (!(this.y - this.s/2 > obj.y + obj.s || obj.y > this.y + this.s/2)) {
+		if (!(this.x - this.s/2 > obj.x + obj.s || obj.x > this.x + this.s/2)) {
 			if (!this.jumping) {
 				return true;
 			}

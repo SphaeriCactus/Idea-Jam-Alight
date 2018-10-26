@@ -3,6 +3,7 @@ let clicked, mouse;
 let keys = [];
 let scene;
 let buttons = [];
+let scl;
 
 let storyText;
 
@@ -31,7 +32,8 @@ function preload() {
 function setup() {
 	createCanvas(800, 800);
 
-	player = new Player(300, 600, 50, 5);
+	scl = 50;
+	player = new Player(300, 600, scl, 5);
 
 	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
 
@@ -44,23 +46,23 @@ function setup() {
 
 	/* Obstacle Types */
 	// img, w, h, speed, damage
-	obstacleTypes.push([chair, 50, 50, 5, 5]);
-	obstacleTypes.push([flowers, 50, 50, 5, 10]);
-	//obstacleTypes.push([laptop, 50, 50, 5, 2]);
+	obstacleTypes.push([chair, scl, 5, 5]);
+	obstacleTypes.push([flowers, scl, 5, 10]);
+	//obstacleTypes.push([laptop, scl, 5, 2]);
 
 	/* Obstacles */
-	spawnObstacles(5);
+	previousPoint = 1000;
 
-	previousPoint = 0;
-
-	for (let i = 0; i <= width/50; i ++) {
-		spawnPoints.push(i * 50);
+	for (let i = 0; i < width; i += scl) {
+		spawnPoints.push(i);
 	}
 
 	fr = 60;
 	interval = 0.5;
 	counter = 0;
 	obstacleAmmount = 5;
+
+	obstacles.push(new Obstacle(flowers, 100, -100, scl, 5, 10)); // img, x, y, w, h, speed, damage
 
 	score = 0;
 
@@ -85,7 +87,9 @@ function keyReleased() {
 function spawnObstacles(ammount) {
 	for (let i = 1; i <= ammount; i ++) {
 		let o = random(obstacleTypes);
-		let possiblePoints = spawnPoints.splice((previousPoint/50 > 0 ? - 1 : 0), 3);
+		let possiblePoints = spawnPoints;
+		let previousIndex = previousPoint/scl;
+		possiblePoints.splice((previousIndex > 0 ? previousPoint - 1 : 0), (previousIndex == 13 ? 2 : (previousIndex == 14 ? 1 : 3)));
 		let x = random(possiblePoints);
 		obstacles.push(new Obstacle(o[0], x, random(-400, (o[2] * -1)), o[1], o[2], o[3], o[4]));
 		previousPoint = x;
@@ -166,7 +170,7 @@ function game() {
 
 		if (player.collide(o)) {
 			player.health -= o.damage;
-			bursts.push(new Burst(o.x + o.w/2, o.y + o.h/2, color(222, 133, 49), color(179, 41, 0)));
+			bursts.push(new Burst(o.x + o.s/2, o.y + o.s/2, color(222, 133, 49), color(179, 41, 0)));
 			obstacles.splice(i, 1);
 		}
 

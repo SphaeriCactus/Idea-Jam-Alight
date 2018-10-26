@@ -11,8 +11,6 @@ function Burst(x, y, colour1, colour2) {
 		//let v = createVector(-1, -1);
 		let a = degrees(asin((i * 10 / 360) * PI/180));
 		let v = createVector(sin(a)/5, cos(a)/5);
-		console.log('Sine:' + sin(a)/5);
-		console.log('Cosine:' + cos(a)/5);
 		let s = floor(random(3, 10));
 		let c = lerpColor(colour1, colour2, random(0.1, 0.9));
 		this.particles.push(new Particle(this.pos, v, c, s, this.fadeSpeed));

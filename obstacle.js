@@ -1,9 +1,8 @@
-function Obstacle(img, x, y, w, h, speed, damage) {
+function Obstacle(img, x, y, s, speed, damage) {
 	this.img = img;
 	this.x = x;
 	this.y = y;
-	this.w = w;
-	this.h = h;
+	this.s = s;
 	this.speed = speed;
 	this.damage = damage;
 }
