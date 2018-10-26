@@ -17,5 +17,6 @@ Particle.prototype.update = function() {
 Particle.prototype.draw = function() {
 	(fill) (this.colour, this.fade);
 	noStroke();
-	ellipse(this.pos.x, this.pos.y, this.s, this.s);
+	translate(this.pos.x, this.pos.y);
+	ellipse(0, 0, this.s, this.s);
 };

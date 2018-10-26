@@ -1,19 +1,19 @@
-function Burst(x, y, colour1, colour2) {
-	this.pos = createVector(x, y);
-	this.colour1 = colour1;
-	this.colour2 = colour2;
+function Burst(pos, vel, c1, c2, s1, s2, fadeSpeed) {
+	this.pos = pos;
+	this.vel = vel;
+	this.c1 = c1;
+	this.c2 = c2;
+	this.s1 = s1;
+	this.s2 = s2;
 
 	this.particles = [];
 
-	this.fadeSpeed = 0.02;
+	this.fadeSpeed = fadeSpeed;
 
-	for (let i = -18; i <= 18; i ++) {
-		//let v = createVector(-1, -1);
-		let a = degrees(asin((i * 10 / 360) * PI/180));
-		let v = createVector(sin(a)/5, cos(a)/5);
-		let s = floor(random(3, 10));
-		let c = lerpColor(colour1, colour2, random(0.1, 0.9));
-		this.particles.push(new Particle(this.pos, v, c, s, this.fadeSpeed));
+	for (let i = 1; i <= 20; i ++) {
+		let s = floor(random(s1, s2));
+		let c = lerpColor(c1, c2, random(0.1, 0.9));
+		this.particles.push(new Particle(this.pos, this.vel, c, s, this.fadeSpeed));
 	}
 }
 

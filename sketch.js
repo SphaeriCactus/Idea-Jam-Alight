@@ -14,7 +14,7 @@ let obstacleTypes = [];
 let obstacles = [];
 let previousPoint;
 
-let bursts = [];
+let explosions = [];
 
 let chair, flowers, laptop, longFlames;
 let flameX, flameSpeed;
@@ -212,7 +212,7 @@ function game() {
 
 		if (player.collide(o)) {
 			player.health -= o.damage;
-			bursts.push(new Burst(o.x + o.s/2, o.y + o.s/2, color(222, 133, 49), color(179, 41, 0)));
+			explosions.push(new Explosion(o.x + o.s/2, o.y + o.s/2, color(222, 133, 49), color(179, 41, 0)));
 			obstacles.splice(i, 1);
 		}
 
@@ -225,12 +225,12 @@ function game() {
 	player.draw();
 	player.update();
 
-	for (let i = bursts.length - 1; i >= 0; i --) {
-		let b = bursts[i];
-		b.draw();
+	for (let i = explosions.length - 1; i >= 0; i --) {
+		let e = explosions[i];
+		e.draw();
 
-		if (b.particles.length == 0) {
-			bursts.splice(i, 0);
+		if (e.bursts.length == 0) {
+			explosions.splice(i, 0);
 		}
 	}
 
