@@ -45,7 +45,7 @@ function setup() {
 	buttons.push(new Button(width/2, height - height/6, 150, 50, 40, "BACK", "menu"));
 
 	/* Obstacle Types */
-	// img, w, h, speed, damage
+	// img, [x], [y], s, speed, damage
 	obstacleTypes.push([chair, scl, 5, 5]);
 	obstacleTypes.push([flowers, scl, 5, 10]);
 	//obstacleTypes.push([laptop, scl, 5, 2]);
@@ -87,11 +87,11 @@ function keyReleased() {
 function spawnObstacles(ammount) {
 	for (let i = 1; i <= ammount; i ++) {
 		let o = random(obstacleTypes);
-		let possiblePoints = spawnPoints;
-		let previousIndex = previousPoint/scl;
-		possiblePoints.splice((previousIndex > 0 ? previousPoint - 1 : 0), (previousIndex == 13 ? 2 : (previousIndex == 14 ? 1 : 3)));
+		let previousIndex = spawnPoints.indexOf(previousPoint);
+		let possiblePoints = spawnPoints.splice(previousIndex, 1);
+		//possiblePoints.splice(previousIndex, 1);
 		let x = random(possiblePoints);
-		obstacles.push(new Obstacle(o[0], x, random(-400, (o[2] * -1)), o[1], o[2], o[3], o[4]));
+		obstacles.push(new Obstacle(o[0], x, random(-50), o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
 		previousPoint = x;
 	}
 }
