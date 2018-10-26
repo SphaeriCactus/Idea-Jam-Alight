@@ -25,7 +25,7 @@ Player.prototype.update = function() {
 
 	if ((keys[UP_ARROW] || keys[87]) && this.canJump) {
 		this.jumping = true;
-		this.gravity = 1.5;
+		this.gravity = 2;
 	}
 
 	this.canJump = false;
@@ -56,4 +56,5 @@ Player.prototype.collide = function(obj) {
 Player.prototype.draw = function() {
 	imageMode(CENTER);
 	image((this.health > 50 ? playerImg : playerImg2), this.x, this.y, this.s, this.s);
+	imageMode(CORNER);
 };

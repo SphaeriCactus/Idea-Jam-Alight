@@ -177,7 +177,7 @@ function game() {
 	}
 
 	if (player.health <= 0) {
-		scene = "game over";
+		//scene = "game over";
 	}
 
 	counter ++;
