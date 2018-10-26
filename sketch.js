@@ -20,14 +20,17 @@ function preload() {
 function setup() {
 	createCanvas(800, 800);
 
-	player = new Player(300, 600, 50, 50, 5);
+	player = new Player(300, 600, 50, 5);
 
 	/* Buttons */
-	buttons.push(new Button(width/2, height/2, 200, 100, 60, "PLAY", "game"));
-	buttons.push(new Button(width/2, height/2 + height/4, 200, 100, 50, "STORY", "story"));
+	// x, y, w, h, size, label, next
+	buttons.push(new Button(width/2, height/2, 200, 100, 50, "PLAY", "game"));
+	buttons.push(new Button(width/2, height/2 + height/6, 200, 100, 50, "HELP", "help"));
+	buttons.push(new Button(width/2, height/2 + height/3, 200, 100, 50, "STORY", "story"));
 
 	/* Obstacle Types */
-	obstacleTypes.push([chair, 50, 50, 5, 5]); // img, w, h, speed, damage
+	// img, w, h, speed, damage
+	obstacleTypes.push([chair, 50, 50, 5, 5]);
 
 	/* Obstacles */
 	spawnObstacles(5);
@@ -67,11 +70,10 @@ function spawnObstacles(ammount) {
 function menu() {
 	background(235);
 
-	buttons[0].draw();
-	buttons[0].update();
-
-	buttons[1].draw();
-	buttons[1].update();
+	for (let i = 0; i < buttons.length; i ++) {
+		buttons[i].draw();
+		buttons[i].update();
+	}
 }
 
 function story() {
@@ -122,7 +124,6 @@ function game() {
 	}
 	if (counter >= 2000) {
 		interval = 0.75;
-		console.log("Level 3");
 	}
 
 	if (player.health <= 0) {
