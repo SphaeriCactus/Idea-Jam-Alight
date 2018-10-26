@@ -11,6 +11,8 @@ let playerImg, playerImg2, flames;
 let obstacleTypes = [];
 let obstacles = [];
 
+let bursts = [];
+
 let chair, flowers, laptop;
 let fr, interval, counter, obstacleAmmount;
 let score;
@@ -152,6 +154,7 @@ function game() {
 
 		if (player.collide(o)) {
 			player.health -= o.damage;
+			bursts.push(new Burst(o.x + o.w/2, o.y + o.h/2, color(222, 133, 49), color(179, 41, 0)));
 			obstacles.splice(i, 1);
 		}
 
@@ -163,6 +166,15 @@ function game() {
 
 	player.draw();
 	player.update();
+
+	for (let i = bursts.length - 1; i >= 0; i --) {
+		let b = bursts[i];
+		b.draw();
+
+		if (b.particles.length == 0) {
+			bursts.splice(i, 0);
+		}
+	}
 
 	if (frameCount % (fr * interval) === 0) {
 		spawnObstacles(obstacleAmmount);

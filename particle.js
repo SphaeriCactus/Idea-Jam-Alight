@@ -9,12 +9,12 @@ function Particle(pos, vel, colour, s, fadeSpeed) {
 	this.fadeSpeed = fadeSpeed;
 }
 
-Particle.prototpye.update = function() {
+Particle.prototype.update = function() {
 	this.pos.add(this.vel);
 	this.fade -= this.fadeSpeed;
 };
 
-Particle.prototpye.draw = function() {
+Particle.prototype.draw = function() {
 	(fill) (this.colour, this.fade);
 	noStroke();
 	ellipse(this.pos.x, this.pos.y, this.s, this.s);
