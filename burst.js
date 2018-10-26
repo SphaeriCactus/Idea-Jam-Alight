@@ -5,12 +5,16 @@ function Burst(x, y, colour1, colour2) {
 
 	this.particles = [];
 
-	this.fadeSpeed = 1;
+	this.fadeSpeed = 0.02;
 
-	for (let i = 1; i <= 36; i ++) {
-		let v = createVector(this.pos.x - 5, this.pos.y + 5);
-		let s = random(0.1, 0.9);
-		let c = lerpColor(colour1, colour2, floor(random(3, 10)));
+	for (let i = -18; i <= 18; i ++) {
+		//let v = createVector(-1, -1);
+		let a = degrees(asin((i * 10 / 360) * PI/180));
+		let v = createVector(sin(a)/5, cos(a)/5);
+		console.log('Sine:' + sin(a)/5);
+		console.log('Cosine:' + cos(a)/5);
+		let s = floor(random(3, 10));
+		let c = lerpColor(colour1, colour2, random(0.1, 0.9));
 		this.particles.push(new Particle(this.pos, v, c, s, this.fadeSpeed));
 	}
 }
@@ -22,7 +26,7 @@ Burst.prototype.draw = function() {
 		p.update();
 
 		if (p.fade <= 0) {
-			this.particles.splice(i, 0);
+			this.particles.splice(i, 1);
 		}
 	}
 };

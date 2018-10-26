@@ -8,6 +8,7 @@ let storyText;
 
 let playerImg, playerImg2, flames;
 
+let spawnPoints = [];
 let obstacleTypes = [];
 let obstacles = [];
 
@@ -43,14 +44,18 @@ function setup() {
 	/* Obstacle Types */
 	// img, w, h, speed, damage
 	obstacleTypes.push([chair, 50, 50, 5, 5]);
-	obstacleTypes.push([flowers, 60, 60, 5, 10]);
-	//obstacleTypes.push([laptop, 40, 40, 5, 2]);
+	obstacleTypes.push([flowers, 50, 50, 5, 10]);
+	//obstacleTypes.push([laptop, 50, 50, 5, 2]);
 
 	/* Obstacles */
 	spawnObstacles(5);
 
+	for (let i = 1; i <= width/50; i ++) {
+
+	}
+
 	fr = 60;
-	interval = 1.5;
+	interval = 0.75;
 	counter = 0;
 	obstacleAmmount = 5;
 
@@ -58,6 +63,7 @@ function setup() {
 
 	scene = "menu";
 
+	angleMode(DEGREES);
 	textAlign(CENTER, CENTER);
 }
 
@@ -177,7 +183,7 @@ function game() {
 	}
 
 	if (frameCount % (fr * interval) === 0) {
-		spawnObstacles(obstacleAmmount);
+		//spawnObstacles(obstacleAmmount);
 	}
 
 	if (counter >= 1000) {
