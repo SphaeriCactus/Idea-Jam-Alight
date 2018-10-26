@@ -82,7 +82,6 @@ function spawnObstacles(ammount) {
 function menu() {
 	background(235);
 
-
 	strokeJoin(ROUND);
 
 	strokeWeight(20);
@@ -156,9 +155,9 @@ function game() {
 			obstacles.splice(i, 1);
 		}
 
-		if (o.y > height) {
-			obstacles.splice(i, 1);
+		if (o.y > height + 20) {
 			score ++;
+			obstacles.splice(i, 1);
 		}
 	}
 
