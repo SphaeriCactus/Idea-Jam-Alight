@@ -5,7 +5,7 @@ let scene;
 let buttons = [];
 let scl;
 
-let storyText;
+let storyText, helpText;
 
 let playerImg, playerImg2, flames;
 
@@ -40,12 +40,13 @@ function setup() {
 	flameSpeed = 0.3;
 
 	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
+	helpText = "Use the left and right arrow keys or A and D to move left and right.\nPress the up arrow or W to jump."
 
 	/* Buttons */
 	// x, y, w, h, size, label, next
-	buttons.push(new Button(width/2, height/2, 200, 100, 50, "PLAY", "game"));
-	buttons.push(new Button(width/2, height/2 + height/6, 200, 100, 50, "HELP", "help"));
-	buttons.push(new Button(width/2, height/2 + height/3, 200, 100, 50, "STORY", "story"));
+	buttons.push(new Button(width/2, height/2 + height/20, 200, 100, 50, "PLAY", "game"));
+	buttons.push(new Button(width/4, height/2 + height/4, 200, 100, 50, "HELP", "help"));
+	buttons.push(new Button(width/2 + width/4, height/2 + height/4, 200, 100, 50, "STORY", "story"));
 	buttons.push(new Button(width/2, height - height/6, 150, 50, 40, "BACK", "menu"));
 
 	/* Obstacle Types */
@@ -66,7 +67,8 @@ function setup() {
 	counter = 0;
 	obstacleAmmount = 5;
 
-	obstacles.push(new Obstacle(flowers, 100, -100, scl, 5, 10)); // img, x, y, w, h, speed, damage
+	let o = random(obstacleTypes);
+	obstacles.push(new Obstacle(o[0], 100, -100, o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
 
 	score = 0;
 
@@ -100,11 +102,17 @@ function spawnObstacles(ammount) {
 	for (let i = 1; i <= ammount; i ++) {
 		let o = random(obstacleTypes);
 		let previousIndex = spawnPoints.indexOf(previousPoint);
-		let possiblePoints = spawnPoints.splice(previousIndex, 1);
-		//possiblePoints.splice(previousIndex, 1);
+		let possiblePoints = spawnPoints.slice();
+		possiblePoints.splice(previousIndex, 1);
 		let x = random(possiblePoints);
 		obstacles.push(new Obstacle(o[0], x, -scl, o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
 		previousPoint = x;
+	}
+}
+
+function updateTypes(i, ammountToAdd) {
+	for (let o = 0; o < obstacleTypes.length; o ++) {
+		o[i] = o[i] + ammountToAdd;
 	}
 }
 
@@ -161,6 +169,26 @@ function story() {
 	buttons[3].update();
 }
 
+function help() {
+	background(235);
+
+	strokeWeight(7);
+	stroke(51, 10, 4);
+	strokeJoin(ROUND);
+	fill(108, 19, 5);
+	textSize(80);
+	text("HELP", width/2, height/4);
+	strokeJoin(MITER);
+
+	textSize(20);
+	noStroke();
+	fill(51, 10, 4);
+	text(helpText, width/2, height/2);
+
+	buttons[3].draw();
+	buttons[3].update();
+}
+
 function gameOver() {
 	background(235);
 }
@@ -211,10 +239,14 @@ function game() {
 	}
 
 	if (counter >= 1000) {
-		interval = 0.3;
+		interval = 0.25;
 	}
 	if (counter >= 2000) {
-		interval = 0.1;
+		speed = 7;
+		updateTypes(2, 2); // index, ammountToAdd
+	}
+	if (counter >= 3000) {
+		updateTypes(3, 5); // index, ammountToAdd
 	}
 
 	if (player.health <= 0) {
@@ -233,6 +265,7 @@ function game() {
 	counter ++;
 }
 
+/* Loop */
 function draw() {
 	mouse = ARROW;
 
@@ -242,6 +275,9 @@ function draw() {
 			break;
 		case "story":
 			story();
+			break;
+		case "help":
+			help();
 			break;
 		case "game":
 			game();
