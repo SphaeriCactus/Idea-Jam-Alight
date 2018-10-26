@@ -11,6 +11,7 @@ let playerImg, playerImg2, flames;
 let spawnPoints = [];
 let obstacleTypes = [];
 let obstacles = [];
+let previousPoint;
 
 let bursts = [];
 
@@ -50,12 +51,14 @@ function setup() {
 	/* Obstacles */
 	spawnObstacles(5);
 
-	for (let i = 1; i <= width/50; i ++) {
+	previousPoint = 0;
 
+	for (let i = 0; i <= width/50; i ++) {
+		spawnPoints.push(i * 50);
 	}
 
 	fr = 60;
-	interval = 0.75;
+	interval = 0.5;
 	counter = 0;
 	obstacleAmmount = 5;
 
@@ -82,7 +85,10 @@ function keyReleased() {
 function spawnObstacles(ammount) {
 	for (let i = 1; i <= ammount; i ++) {
 		let o = random(obstacleTypes);
-		obstacles.push(new Obstacle(o[0], random(width - o[1]), random(-400, (o[2] * -1)), o[1], o[2], o[3], o[4]));
+		let possiblePoints = spawnPoints.splice((previousPoint/50 > 0 ? - 1 : 0), 3);
+		let x = random(possiblePoints);
+		obstacles.push(new Obstacle(o[0], x, random(-400, (o[2] * -1)), o[1], o[2], o[3], o[4]));
+		previousPoint = x;
 	}
 }
 
@@ -183,15 +189,14 @@ function game() {
 	}
 
 	if (frameCount % (fr * interval) === 0) {
-		//spawnObstacles(obstacleAmmount);
+		spawnObstacles(1);
 	}
 
 	if (counter >= 1000) {
-		interval = 1;
-		obstacleAmmount = 6;
+		interval = 0.3;
 	}
 	if (counter >= 2000) {
-		interval = 0.75;
+		interval = 0.1;
 	}
 
 	if (player.health <= 0) {
