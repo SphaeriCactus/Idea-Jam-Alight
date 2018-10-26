@@ -16,17 +16,18 @@ let previousPoint;
 
 let bursts = [];
 
-let chair, flowers, laptop;
+let chair, flowers, laptop, longFlames;
+let flameX, flameSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score;
 
 function preload() {
 	playerImg = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player.png");
 	playerImg2 = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player2.png");
-	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png");
+	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png"); // 100 px long, 30 px tall
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 	flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
-	//laptop = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/laptop.png");
+	laptop = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/laptop.png");
 }
 
 function setup() {
@@ -34,6 +35,9 @@ function setup() {
 
 	scl = 50;
 	player = new Player(300, 600, scl, 5);
+
+	flameX = 0;
+	flameSpeed = 0.3;
 
 	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
 
@@ -48,7 +52,7 @@ function setup() {
 	// img, [x], [y], s, speed, damage
 	obstacleTypes.push([chair, scl, 5, 5]);
 	obstacleTypes.push([flowers, scl, 5, 10]);
-	//obstacleTypes.push([laptop, scl, 5, 2]);
+	obstacleTypes.push([laptop, scl, 5, 2]);
 
 	/* Obstacles */
 	previousPoint = 1000;
@@ -67,6 +71,14 @@ function setup() {
 	score = 0;
 
 	scene = "menu";
+
+	background(0, 0, 0, 0);
+
+	for (let x = 0; x < width; x += 100) {
+		image(flames, x, 0);
+	}
+
+	longFlames = get(0, 0, width, 30);
 
 	angleMode(DEGREES);
 	textAlign(CENTER, CENTER);
@@ -91,7 +103,7 @@ function spawnObstacles(ammount) {
 		let possiblePoints = spawnPoints.splice(previousIndex, 1);
 		//possiblePoints.splice(previousIndex, 1);
 		let x = random(possiblePoints);
-		obstacles.push(new Obstacle(o[0], x, random(-50), o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
+		obstacles.push(new Obstacle(o[0], x, -scl, o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
 		previousPoint = x;
 	}
 }
@@ -115,6 +127,8 @@ function menu() {
 	text("ALIGHT", width/2, height/4);
 
 	strokeJoin(MITER);
+
+	image(longFlames, 0, height/4 + height/10);
 
 	for (let i = 0; i < 3; i ++) {
 		buttons[i].draw();
@@ -205,6 +219,15 @@ function game() {
 
 	if (player.health <= 0) {
 		//scene = "game over";
+	}
+
+	image(longFlames, flameX, height - 30);
+	image(longFlames, flameX - width, height - 30);
+
+	flameX += flameSpeed;
+
+	if (flameX > width) {
+		flameX = 0;
 	}
 
 	counter ++;
