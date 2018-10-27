@@ -16,7 +16,7 @@ let clouds = [];
 let previousPoint;
 
 let dust, longFlames, level, ground;
-let bed, drawers, fridge, microwave, stove, table, tree, tv, laptop, flowers, chair;
+let bed, drawers, fridge, microwave, stove, table, tree, tv, laptop, flowers, chair, wardrobe, lamp;
 let flameX, flameX2, flameSpeed, dissappearSpeed, appearSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score, levels;
@@ -25,7 +25,7 @@ function preload() {
 	playerImg = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player.png");
 	ground = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/ground.png");
 	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png"); // 100 px long, 30 px tall
-	dust = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/dust.png");
+	dust = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/cloud.png");
 	level = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lightning.png");
 
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
@@ -40,6 +40,8 @@ function preload() {
 	table = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/table.png");
 	tree = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/tree.png");
 	tv = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/tv.png");
+	wardrobe = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/wardrobe.png");
+	lamp = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lamp.png");
 }
 
 function setup() {
@@ -288,8 +290,7 @@ function gameOver() {
 }
 
 function game() {
-	background(235);
-	//image(ground, 0, 0);
+	image(ground, 0, 0);
 
 	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
