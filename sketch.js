@@ -7,6 +7,8 @@ let scl;
 
 let storyText, helpText;
 
+let opacity, opacityIncrement;
+
 let playerImg, flames;
 
 let spawnPoints = [];
@@ -49,6 +51,9 @@ function setup() {
 
 	scl = 50;
 	player = new Player(300, 600, scl, 5);
+
+	opacity = 0;
+	opacityIncrement = 10;
 
 	flameX = 0;
 	flameX2 = width;
@@ -155,6 +160,12 @@ function keySymbol(letter, x, y, s) {
 	noStroke();
 	textSize(s/2);
 	text(letter, x + s/2, y + s/2);
+}
+
+function overlay() {
+	fill(255, 255, 255, opacity);
+	noStroke();
+	rect(0, 0, width, height);
 }
 
 /* Scenes */
@@ -405,6 +416,10 @@ function draw() {
 		case "game over":
 			gameOver();
 			break;
+	}
+
+	if (opacity > 0 ) {
+		opacity -= opacityIncrement;
 	}
 
 	cursor(mouse);
