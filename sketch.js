@@ -12,9 +12,10 @@ let playerImg, playerImg2, flames;
 let spawnPoints = [];
 let obstacleTypes = [];
 let obstacles = [];
+let clouds = [];
 let previousPoint;
 
-let chair, flowers, laptop, longFlames;
+let chair, flowers, laptop, dust, longFlames;
 let flameX, flameSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score;
@@ -23,6 +24,8 @@ function preload() {
 	playerImg = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player.png");
 	playerImg2 = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player2.png");
 	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png"); // 100 px long, 30 px tall
+	dust = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/dust.png");
+
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 	flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
 	laptop = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/laptop.png");
