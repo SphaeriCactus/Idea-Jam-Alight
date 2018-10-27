@@ -16,7 +16,7 @@ let clouds = [];
 let previousPoint;
 
 let chair, flowers, laptop, dust, longFlames;
-let flameX, flameSpeed;
+let flameX, flameSpeed, dissapearSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score;
 
@@ -39,6 +39,7 @@ function setup() {
 
 	flameX = 0;
 	flameSpeed = 0.3;
+	dissapearSpeed = 30;
 
 	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
 	helpText = "Use the left and right arrow keys or A and D to move left and right.\nPress the up arrow or W to jump."
@@ -245,10 +246,16 @@ function game() {
 		//scene = "game over";
 	}
 
-	for (let i = 0; i < clouds.length; i ++) {
+	for (let i = clouds.length - 1; i >= 0; i --) {
 		tint(255, clouds[i][0]);
-		image(dust, clouds[i][1], clouds[i][2]);
+		image(dust, clouds[i][1], clouds[i][2], 60, 20);
 		tint(255, 255);
+
+		clouds[i][0] -= dissapearSpeed;
+
+		if (clouds[i][0] <= 0) {
+			clouds.splice(i, 1);
+		}
 	}
 
 	image(longFlames, flameX, height - 30);
