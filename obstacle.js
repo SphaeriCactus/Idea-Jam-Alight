@@ -12,5 +12,5 @@ Obstacle.prototype.update = function() {
 };
 
 Obstacle.prototype.draw = function() {
-	image(this.img, this.x, this.y);
+	image(this.img, this.x, this.y, this.s, this.s);
 };

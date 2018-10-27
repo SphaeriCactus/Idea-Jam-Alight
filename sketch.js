@@ -290,26 +290,6 @@ function gameOver() {
 function game() {
 	background(235);
 
-	fill(51, 10, 4);
-	noStroke();
-	textSize(30);
-	textAlign(LEFT, CENTER);
-	text("Health: ", 25, 50);
-	text("Score: " + score, 25, 100);
-	textAlign(CENTER, CENTER);
-
-	strokeWeight(3);
-	stroke(0);
-	noFill();
-	rect(125, 35, 150, 30);
-
-	fill(255, 0, 0);
-	rect(125, 35, player.health * 1.5, 30);
-
-	for (let x = 0; x < levels; x ++) {
-		image(level, x * 30 + 10, 120);
-	}
-
 	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
 
@@ -350,7 +330,27 @@ function game() {
 	}
 
 	if (player.health <= 0) {
-		//scene = "game over";
+		scene = "game over";
+	}
+
+	fill(51, 10, 4);
+	noStroke();
+	textSize(30);
+	textAlign(LEFT, CENTER);
+	text("Health: ", 25, 50);
+	text("Score: " + score, 25, 100);
+	textAlign(CENTER, CENTER);
+
+	strokeWeight(3);
+	stroke(0);
+	noFill();
+	rect(125, 35, 150, 30);
+
+	fill(255, 0, 0);
+	rect(125, 35, player.health * 1.5, 30);
+
+	for (let x = 0; x < levels; x ++) {
+		image(level, x * 30 + 10, 120);
 	}
 
 	for (let i = clouds.length - 1; i >= 0; i --) {
