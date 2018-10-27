@@ -25,7 +25,7 @@ function preload() {
 	playerImg2 = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player2.png");
 	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png"); // 100 px long, 30 px tall
 	dust = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/dust.png");
-	level = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/level.png");
+	level = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lightning.png");
 
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 	flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
@@ -53,7 +53,7 @@ function setup() {
 	buttons.push(new Button(width/2, height/2 + height/20, 200, 100, 50, "PLAY", "game"));
 	buttons.push(new Button(width/4, height/2 + height/4, 200, 100, 50, "HELP", "help"));
 	buttons.push(new Button(width/2 + width/4, height/2 + height/4, 200, 100, 50, "STORY", "story"));
-	buttons.push(new Button(width/2, height - height/6, 150, 50, 40, "BACK", "menu"));
+	buttons.push(new Button(width/2, height - height/10, 150, 50, 40, "BACK", "menu"));
 
 	/* Obstacle Types */
 	// img, [x], [y], s, speed, damage
@@ -78,7 +78,7 @@ function setup() {
 
 	score = 0;
 
-	scene = "menu";
+	scene = "help";
 
 	background(0, 0, 0, 0);
 
@@ -122,6 +122,18 @@ function updateTypes(i, ammountToAdd) {
 	}
 }
 
+function keySymbol(letter, x, y, s) {
+	stroke(0);
+	strokeWeight(2);
+	fill(23);
+	rect(x, y, s, s, 10);
+
+	fill(255);
+	noStroke();
+	textSize(s/2);
+	text(letter, x + s/2, y + s/2);
+}
+
 /* Scenes */
 function menu() {
 	background(235);
@@ -158,7 +170,7 @@ function story() {
 	strokeJoin(ROUND);
 	fill(108, 19, 5);
 	textSize(80);
-	text("STORY", width/2, height/4);
+	text("STORY", width/2, height/6);
 
 	stroke(108, 19, 5);
 	fill(179, 41, 0);
@@ -183,13 +195,18 @@ function help() {
 	strokeJoin(ROUND);
 	fill(108, 19, 5);
 	textSize(80);
-	text("HELP", width/2, height/4);
+	text("HELP", width/2, height/6);
 	strokeJoin(MITER);
 
-	textSize(20);
-	noStroke();
-	fill(51, 10, 4);
-	text(helpText, width/2, height/2);
+
+	keySymbol("◀", 100, 270, 75);
+	keySymbol("A", 270, 270, 75);
+
+	keySymbol("▶", 100, 370, 75);
+	keySymbol("D", 270, 370, 75);
+
+	keySymbol("▲", 100, 470, 75);
+	keySymbol("W", 270, 470, 75);
 
 	buttons[3].draw();
 	buttons[3].update();
@@ -210,7 +227,7 @@ function game() {
 	text("Score: " + score, 25, 100);
 	textAlign(CENTER, CENTER);
 
-	strokeWeight(5);
+	strokeWeight(3);
 	stroke(0);
 	noFill();
 	rect(125, 35, 150, 30);
