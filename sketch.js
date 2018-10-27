@@ -300,6 +300,37 @@ function help() {
 
 function gameOver() {
 	background(235);
+
+	strokeWeight(7);
+	stroke(51, 10, 4);
+	strokeJoin(ROUND);
+	fill(108, 19, 5);
+	textSize(80);
+	text("GAME OVER", width/2, height/4);
+
+	fill(179, 41, 0);
+	stroke(108, 19, 5);
+	text(score, width/2, height/2 + height/3 - height/30);
+	strokeJoin(MITER);
+
+	noStroke();
+	fill(51, 10, 4);
+	textSize(35);
+	text("Good job!", width/2, height/2 - height/10);
+	text("You got to a difficulty level of " + levels + ",\nwith a score of " + score + "!", width/2, height/2);
+
+	for (let x = 0; x < levels; x ++) {
+		image(level, x * 70 + 250, 500, 60, 60);
+	}
+
+	image(longFlames, flameX, height - 30);
+	image(longFlames, flameX - width, height - 30);
+
+	flameX += flameSpeed;
+
+	if (flameX > width) {
+		flameX = 0;
+	}
 }
 
 function game() {
@@ -386,6 +417,7 @@ function game() {
 	flameX += flameSpeed;
 
 	if (player.health <= 0) {
+		opacity = 255;
 		scene = "game over";
 	}
 
