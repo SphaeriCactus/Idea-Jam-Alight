@@ -15,16 +15,17 @@ let obstacles = [];
 let clouds = [];
 let previousPoint;
 
-let chair, flowers, laptop, dust, longFlames;
+let chair, flowers, laptop, dust, longFlames, level;
 let flameX, flameSpeed, dissappearSpeed, appearSpeed;
 let fr, interval, counter, obstacleAmmount;
-let score;
+let score, levels;
 
 function preload() {
 	playerImg = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player.png");
 	playerImg2 = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player2.png");
 	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png"); // 100 px long, 30 px tall
 	dust = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/dust.png");
+	level = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/level.png");
 
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 	flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
@@ -41,6 +42,8 @@ function setup() {
 	flameSpeed = 0.3;
 	dissappearSpeed = 30;
 	appearSpeed = 70;
+
+	levels = 1;
 
 	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
 	helpText = "Use the left and right arrow keys or A and D to move left and right.\nPress the up arrow or W to jump."
@@ -210,7 +213,14 @@ function game() {
 	strokeWeight(5);
 	stroke(0);
 	noFill();
-	rect(125, 30, 100, 30);
+	rect(125, 35, 150, 30);
+
+	fill(255, 0, 0);
+	rect(125, 35, player.health * 1.5, 30);
+
+	for (let x = 0; x < levels; x ++) {
+		image(level, x * 30 + 10, 120);
+	}
 
 	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
@@ -239,13 +249,16 @@ function game() {
 
 	if (counter >= 1000) {
 		interval = 0.25;
+		levels = 2;
 	}
 	if (counter >= 2000) {
 		speed = 7;
 		updateTypes(2, 2); // index, ammountToAdd
+		levels = 3;
 	}
 	if (counter >= 3000) {
 		updateTypes(3, 5); // index, ammountToAdd
+		levels = 4;
 	}
 
 	if (player.health <= 0) {
