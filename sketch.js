@@ -16,7 +16,7 @@ let clouds = [];
 let previousPoint;
 
 let chair, flowers, laptop, dust, longFlames, level;
-let flameX, flameSpeed, dissappearSpeed, appearSpeed;
+let flameX, flameX2, flameSpeed, dissappearSpeed, appearSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score, levels;
 
@@ -39,13 +39,14 @@ function setup() {
 	player = new Player(300, 600, scl, 5);
 
 	flameX = 0;
+	flameX2 = width;
 	flameSpeed = 0.3;
 	dissappearSpeed = 30;
 	appearSpeed = 70;
 
 	levels = 1;
 
-	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
+	storyText = "You leave your house to take a walk in the park, but when you come\nback it's on fire! You vaguely recall leaving the iron on...\nYou focus on the task at hand, but before you can reach for your\nphone to dial 911, the flames swallow it up! You start running\naway, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the\nflames trail behind you!";
 	helpText = "Use the left and right arrow keys or A and D to move left and right.\nPress the up arrow or W to jump."
 
 	/* Buttons */
@@ -78,7 +79,7 @@ function setup() {
 
 	score = 0;
 
-	scene = "help";
+	scene = "menu";
 
 	background(0, 0, 0, 0);
 
@@ -154,8 +155,25 @@ function menu() {
 
 	strokeJoin(MITER);
 
-	image(longFlames, 0, height/4 + height/10);
+	image(longFlames, flameX, height/4 + height/10);
+	image(longFlames, flameX - width, height/4 + height/10);
 
+	flameX += flameSpeed;
+
+	if (flameX > width) {
+		flameX = 0;
+	}
+
+	image(longFlames, flameX2, height - 30);
+	image(longFlames, flameX2 - width, height - 30);
+
+	flameX2 -= flameSpeed;
+
+	if (flameX2 < 0) {
+		flameX2 = width;
+	}
+
+	/* Buttons */
 	for (let i = 0; i < 3; i ++) {
 		buttons[i].draw();
 		buttons[i].update();
@@ -178,10 +196,19 @@ function story() {
 	text("RUN!!!", width/2, height - height/3);
 	strokeJoin(MITER);
 
-	textSize(20);
+	textSize(25);
 	noStroke();
 	fill(51, 10, 4);
-	text(storyText, width/2, height/2);
+	text(storyText, width/2, height/2 - height/15);
+
+	image(longFlames, flameX2, height - 30);
+	image(longFlames, flameX2 - width, height - 30);
+
+	flameX2 -= flameSpeed;
+
+	if (flameX2 < 0) {
+		flameX2 = width;
+	}
 
 	buttons[3].draw();
 	buttons[3].update();
@@ -220,11 +247,19 @@ function help() {
 	text("to move right", 400, 355);
 	text("to jump", 400, 455);
 
-	//textSize(30);
 	text("The           show how difficult it is.\nThe game gets harder and harder.", 100, 600);
 	textAlign(CENTER, CENTER);
 
 	image(level, 200, 530, 60, 60);
+
+	image(longFlames, flameX2, height - 30);
+	image(longFlames, flameX2 - width, height - 30);
+
+	flameX2 -= flameSpeed;
+
+	if (flameX2 < 0) {
+		flameX2 = width;
+	}
 
 	buttons[3].draw();
 	buttons[3].update();
