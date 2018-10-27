@@ -213,8 +213,7 @@ function game() {
 
 		if (player.collide(o)) {
 			player.health -= o.damage;
-			let pos = createVector(o.x + o.s/2, o.y + o.s/2);
-
+			clouds.push([255, o.x - 5, o.y + o.s - 10]);
 			obstacles.splice(i, 1);
 		}
 
@@ -244,6 +243,12 @@ function game() {
 
 	if (player.health <= 0) {
 		//scene = "game over";
+	}
+
+	for (let i = 0; i < clouds.length; i ++) {
+		tint(255, clouds[i][0]);
+		image(dust, clouds[i][1], clouds[i][2]);
+		tint(255, 255);
 	}
 
 	image(longFlames, flameX, height - 30);
