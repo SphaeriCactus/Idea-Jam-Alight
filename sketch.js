@@ -33,7 +33,6 @@ function preload() {
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 	flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
 	laptop = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/laptop.png");
-
 	bed = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/bed.png");
 	drawers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/drawers.png");
 	fridge = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/fridge.png");
@@ -146,7 +145,7 @@ function spawnObstacles(ammount) {
 
 function updateTypes(i, ammountToAdd) {
 	for (let o = 0; o < obstacleTypes.length; o ++) {
-		obstacleTypes[o] = obstacleTypes[o] + ammountToAdd;
+		obstacleTypes[o][i] = obstacleTypes[o][i] + ammountToAdd;
 	}
 }
 
@@ -361,34 +360,29 @@ function game() {
 		spawnObstacles(1);
 	}
 
-	if (counter >= 9000) {
-		updateTypes(1, 1); // index, ammountToAdd
-		levels = 10;
-	} else if (counter >= 8000) {
-		interval = 0.15;
-		levels = 9;
-	} else if (counter >= 7000) {
-		updateTypes(2, 1); // index, ammountToAdd
-		levels = 8;
-	} else if (counter >= 6000) {
-		updateTypes(2, 2); // index, ammountToAdd
-		levels = 7;
-	} else if (counter >= 5000) {
-		updateTypes(1, 1); // index, ammountToAdd
-		levels = 6;
-	} else if (counter >= 4000) {
-		interval = 0.2;
-		levels = 5;
-	} else if (counter >= 3000) {
-		updateTypes(2, 5); // index, ammountToAdd
-		levels = 4;
-	} else if (counter >= 2000) {
-		speed = 7;
-		updateTypes(1, 2); // index, ammountToAdd
-		levels = 3;
-	} else if (counter >= 1000) {
-		interval = 0.25;
-		levels = 2;
+	if (counter >= 1000) {
+		if (levels == 1) {
+			interval = 0.25;
+		} else if (levels == 2) {
+			updateTypes(1, 2); // index, ammountToAdd
+		} else if (levels == 3) {
+			updateTypes(2, 3); // index, ammountToAdd
+		} else if (levels == 4) {
+			interval = 0.2;
+		} else if (levels == 5) {
+			updateTypes(1, 1); // index, ammountToAdd
+		} else if (levels == 6) {
+			updateTypes(2, 2); // index, ammountToAdd
+		} else if (levels == 7) {
+			updateTypes(2, 1); // index, ammountToAdd
+		} else if (levels == 8) {
+			interval = 0.15;
+		} else if (levels == 9) {
+			updateTypes(1, 1); // index, ammountToAdd
+		}
+
+		levels ++;
+		counter = 0;
 	}
 
 	fill(51, 10, 4);
