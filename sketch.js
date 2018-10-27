@@ -199,14 +199,32 @@ function help() {
 	strokeJoin(MITER);
 
 
-	keySymbol("◀", 100, 270, 75);
-	keySymbol("A", 270, 270, 75);
+	keySymbol("◀", 100, 220, 75);
+	keySymbol("A", 270, 220, 75);
 
-	keySymbol("▶", 100, 370, 75);
-	keySymbol("D", 270, 370, 75);
+	keySymbol("▶", 100, 320, 75);
+	keySymbol("D", 270, 320, 75);
 
-	keySymbol("▲", 100, 470, 75);
-	keySymbol("W", 270, 470, 75);
+	keySymbol("▲", 100, 420, 75);
+	keySymbol("W", 270, 420, 75);
+
+	noStroke();
+	fill(51, 10, 4);
+	textSize(40);
+	text("OR", 220, 255);
+	text("OR", 220, 355);
+	text("OR", 220, 455);
+
+	textAlign(LEFT, CENTER);
+	text("to move left", 400, 255);
+	text("to move right", 400, 355);
+	text("to jump", 400, 455);
+
+	//textSize(30);
+	text("The           show how difficult it is.\nThe game gets harder and harder.", 100, 600);
+	textAlign(CENTER, CENTER);
+
+	image(level, 200, 530, 60, 60);
 
 	buttons[3].draw();
 	buttons[3].update();
