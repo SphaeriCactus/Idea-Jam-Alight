@@ -16,7 +16,7 @@ let clouds = [];
 let previousPoint;
 
 let chair, flowers, laptop, dust, longFlames;
-let flameX, flameSpeed, dissapearSpeed;
+let flameX, flameSpeed, dissappearSpeed, appearSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score;
 
@@ -39,7 +39,8 @@ function setup() {
 
 	flameX = 0;
 	flameSpeed = 0.3;
-	dissapearSpeed = 30;
+	dissappearSpeed = 30;
+	appearSpeed = 70;
 
 	storyText = "You leave your house to take a walk in the park, but when you come back it's on fire!\nYou vaguely recall leaving the iron on... You focus on the task at hand,\nbut before you can reach for your phone to dial 911, the flames swallow it up!\nYou start running away, but the front door is blocked. You run out a different way,\ntrying to avoid all the objects in your house as the flames trail behind you!";
 	helpText = "Use the left and right arrow keys or A and D to move left and right.\nPress the up arrow or W to jump."
@@ -202,9 +203,14 @@ function game() {
 	noStroke();
 	textSize(30);
 	textAlign(LEFT, CENTER);
-	text("Health: " + player.health, 25, 50);
+	text("Health: ", 25, 50);
 	text("Score: " + score, 25, 100);
 	textAlign(CENTER, CENTER);
+
+	strokeWeight(5);
+	stroke(0);
+	noFill();
+	rect(125, 30, 100, 30);
 
 	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
@@ -214,7 +220,7 @@ function game() {
 
 		if (player.collide(o)) {
 			player.health -= o.damage;
-			clouds.push([255, o.x - 5, o.y + o.s - 10]);
+			clouds.push([1, o.x, o.y, true]);
 			obstacles.splice(i, 1);
 		}
 
@@ -248,13 +254,19 @@ function game() {
 
 	for (let i = clouds.length - 1; i >= 0; i --) {
 		tint(255, clouds[i][0]);
-		image(dust, clouds[i][1], clouds[i][2], 60, 20);
+		image(dust, clouds[i][1], clouds[i][2]);
 		tint(255, 255);
 
-		clouds[i][0] -= dissapearSpeed;
+		if (clouds[i][3]) {
+			clouds[i][0] += appearSpeed;
+		} else {
+			clouds[i][0] -= dissappearSpeed;
+		}
 
 		if (clouds[i][0] <= 0) {
 			clouds.splice(i, 1);
+		} else if (clouds[i][0] >= 255) {
+			clouds[i][3] = false;
 		}
 	}
 
