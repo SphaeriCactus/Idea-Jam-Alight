@@ -7,7 +7,7 @@ let scl;
 
 let storyText, helpText;
 
-let playerImg, playerImg2, flames;
+let playerImg, flames;
 
 let spawnPoints = [];
 let obstacleTypes = [];
@@ -15,15 +15,15 @@ let obstacles = [];
 let clouds = [];
 let previousPoint;
 
-let chair, flowers, laptop, dust, longFlames, level;
-let bed, drawers, fridge, microwave, stove, table, tree, tv;
+let dust, longFlames, level, ground;
+let bed, drawers, fridge, microwave, stove, table, tree, tv, laptop, flowers, chair;
 let flameX, flameX2, flameSpeed, dissappearSpeed, appearSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score, levels;
 
 function preload() {
 	playerImg = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player.png");
-	playerImg2 = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/player2.png");
+	ground = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/ground.png");
 	flames = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flames.png"); // 100 px long, 30 px tall
 	dust = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/dust.png");
 	level = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lightning.png");
@@ -289,6 +289,7 @@ function gameOver() {
 
 function game() {
 	background(235);
+	//image(ground, 0, 0);
 
 	for (let i = obstacles.length - 1; i >= 0; i --) {
 		let o = obstacles[i];
@@ -327,10 +328,6 @@ function game() {
 	if (counter >= 3000) {
 		updateTypes(3, 5); // index, ammountToAdd
 		levels = 4;
-	}
-
-	if (player.health <= 0) {
-		scene = "game over";
 	}
 
 	fill(51, 10, 4);
