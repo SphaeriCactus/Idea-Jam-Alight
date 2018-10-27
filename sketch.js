@@ -370,7 +370,7 @@ function game() {
 		} else if (levels == 4) {
 			interval = 0.2;
 		} else if (levels == 5) {
-			updateTypes(1, 1); // index, ammountToAdd
+			updateTypes(1, 2); // index, ammountToAdd
 		} else if (levels == 6) {
 			updateTypes(2, 2); // index, ammountToAdd
 		} else if (levels == 7) {
@@ -381,7 +381,9 @@ function game() {
 			updateTypes(1, 1); // index, ammountToAdd
 		}
 
-		levels ++;
+		if (levels <= 9) {
+			levels ++;
+		}
 		counter = 0;
 	}
 
