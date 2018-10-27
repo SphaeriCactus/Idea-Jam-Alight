@@ -16,6 +16,7 @@ let clouds = [];
 let previousPoint;
 
 let chair, flowers, laptop, dust, longFlames, level;
+let bed, drawers, fridge, microwave, stove, table, tree, tv;
 let flameX, flameX2, flameSpeed, dissappearSpeed, appearSpeed;
 let fr, interval, counter, obstacleAmmount;
 let score, levels;
@@ -30,6 +31,15 @@ function preload() {
 	chair = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/chair.png");
 	flowers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/flowers.png");
 	laptop = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/laptop.png");
+
+	bed = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/bed.png");
+	drawers = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/drawers.png");
+	fridge = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/fridge.png");
+	microwave = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/microwave.png");
+	stove = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/stove.png");
+	table = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/table.png");
+	tree = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/tree.png");
+	tv = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/tv.png");
 }
 
 function setup() {
@@ -57,10 +67,18 @@ function setup() {
 	buttons.push(new Button(width/2, height - height/10, 150, 50, 40, "BACK", "menu"));
 
 	/* Obstacle Types */
-	// img, [x], [y], s, speed, damage
-	obstacleTypes.push([chair, scl, 5, 5]);
-	obstacleTypes.push([flowers, scl, 5, 10]);
-	obstacleTypes.push([laptop, scl, 5, 2]);
+	// img, [x], [y], [s], speed, damage
+	obstacleTypes.push([chair, 5, 2]);
+	obstacleTypes.push([flowers, 5, 5]);
+	obstacleTypes.push([laptop, 5, 1]);
+	obstacleTypes.push([bed, 5, 10]);
+	obstacleTypes.push([drawers, 5, 6]);
+	obstacleTypes.push([fridge, 5, 10]);
+	obstacleTypes.push([microwave, 5, 5]);
+	obstacleTypes.push([stove, 5, 9]);
+	obstacleTypes.push([table, 5, 7]);
+	obstacleTypes.push([tree, 5, 5]);
+	obstacleTypes.push([tv, 5, 8]);
 
 	/* Obstacles */
 	previousPoint = 1000;
@@ -75,7 +93,7 @@ function setup() {
 	obstacleAmmount = 5;
 
 	let o = random(obstacleTypes);
-	obstacles.push(new Obstacle(o[0], 100, -100, o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
+	obstacles.push(new Obstacle(o[0], 100, -100, scl, o[1], o[2])); // img, [x], [y], s, speed, damage
 
 	score = 0;
 
@@ -112,7 +130,7 @@ function spawnObstacles(ammount) {
 		let possiblePoints = spawnPoints.slice();
 		possiblePoints.splice(previousIndex, 1);
 		let x = random(possiblePoints);
-		obstacles.push(new Obstacle(o[0], x, -scl, o[1], o[2], o[3])); // img, [x], [y], s, speed, damage
+		obstacles.push(new Obstacle(o[0], x, -scl, scl, o[1], o[2])); // img, [x], [y], [s], speed, damage
 		previousPoint = x;
 	}
 }
