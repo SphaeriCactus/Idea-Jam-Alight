@@ -17,9 +17,9 @@ Player.prototype.ableToJump = function() {
 };
 
 Player.prototype.update = function() {
-	if ((keys[LEFT_ARROW] || keys[65]) && this.x - this.s/2 >= this.speed) {
+	if ((keys[LEFT_ARROW] || keys[65]) && this.x - this.s/2 >= this.speed && !this.jumping) {
 		this.x -= this.speed;
-	} else if ((keys[RIGHT_ARROW] || keys[68]) && this.x + this.s/2 <= (width - this.speed)) {
+	} else if ((keys[RIGHT_ARROW] || keys[68]) && this.x + this.s/2 <= (width - this.speed) && !this.jumping) {
 		this.x += this.speed;
 	}
 
