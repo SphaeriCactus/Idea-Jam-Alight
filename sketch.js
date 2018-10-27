@@ -81,6 +81,8 @@ function setup() {
 	obstacleTypes.push([table, 5, 7]);
 	obstacleTypes.push([tree, 5, 5]);
 	obstacleTypes.push([tv, 5, 8]);
+	obstacleTypes.push([wardrobe, 5, 7]);
+	obstacleTypes.push([lamp, 5, 2]);
 
 	/* Obstacles */
 	previousPoint = 1000;
@@ -353,7 +355,7 @@ function game() {
 
 	for (let i = clouds.length - 1; i >= 0; i --) {
 		tint(255, clouds[i][0]);
-		image(dust, clouds[i][1], clouds[i][2]);
+		image(dust, clouds[i][1], clouds[i][2], scl, scl);
 		tint(255, 255);
 
 		if (clouds[i][3]) {
