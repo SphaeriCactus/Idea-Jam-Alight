@@ -418,7 +418,8 @@ function draw() {
 			break;
 	}
 
-	if (opacity > 0 ) {
+	overlay();
+	if (opacity > 0) {
 		opacity -= opacityIncrement;
 	}
 

@@ -33,6 +33,7 @@ Button.prototype.update = function () {
 		mouse = HAND;
 
 		if (clicked) {
+			opacity = 255;
 			scene = this.next;
 		}
 	}
