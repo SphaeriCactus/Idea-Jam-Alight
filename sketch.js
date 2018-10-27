@@ -354,9 +354,7 @@ function game() {
 	}
 
 	for (let i = clouds.length - 1; i >= 0; i --) {
-		tint(255, clouds[i][0]);
 		image(dust, clouds[i][1], clouds[i][2], scl, scl);
-		tint(255, 255);
 
 		if (clouds[i][3]) {
 			clouds[i][0] += appearSpeed;
@@ -375,6 +373,10 @@ function game() {
 	image(longFlames, flameX - width, height - 30);
 
 	flameX += flameSpeed;
+
+	if (player.health <= 0) {
+		scene = "game over";
+	}
 
 	if (flameX > width) {
 		flameX = 0;
