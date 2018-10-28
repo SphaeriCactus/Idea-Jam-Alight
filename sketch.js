@@ -46,6 +46,7 @@ function preload() {
 	lamp = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lamp.png");
 
 	jump = loadSound("https://sphaericactus.github.io/Idea-Jam-Alight/assets/jump.mp3");
+	hit = loadSound("https://sphaericactus.github.io/Idea-Jam-Alight/assets/hit.mp3");
 }
 
 function setup() {
@@ -345,6 +346,7 @@ function game() {
 		o.update();
 
 		if (player.collide(o)) {
+			hit.play();
 			player.health -= o.damage;
 			clouds.push([1, o.x, o.y, true]);
 			obstacles.splice(i, 1);
