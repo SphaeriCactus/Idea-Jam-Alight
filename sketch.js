@@ -257,7 +257,6 @@ function help() {
 	text("HELP", width/2, height/6);
 	strokeJoin(MITER);
 
-
 	keySymbol("◀", 100, 220, 75);
 	keySymbol("A", 270, 220, 75);
 
@@ -279,7 +278,7 @@ function help() {
 	text("to move right", 400, 355);
 	text("to jump", 400, 455);
 
-	text("The           show how difficult it is.\nThe game gets harder and harder.", 100, 600);
+	text("The          's show how difficult it is.\nThe game gets harder and harder.", 100, 600);
 	textAlign(CENTER, CENTER);
 
 	image(level, 200, 530, 60, 60);
@@ -372,11 +371,11 @@ function game() {
 		} else if (levels == 5) {
 			updateTypes(1, 2); // index, ammountToAdd
 		} else if (levels == 6) {
-			updateTypes(2, 2); // index, ammountToAdd
-		} else if (levels == 7) {
-			updateTypes(2, 1); // index, ammountToAdd
-		} else if (levels == 8) {
 			interval = 0.15;
+		} else if (levels == 7) {
+			updateTypes(2, 2); // index, ammountToAdd
+		} else if (levels == 8) {
+			interval = 0.1;
 		} else if (levels == 9) {
 			updateTypes(1, 1); // index, ammountToAdd
 		}
