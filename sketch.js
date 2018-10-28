@@ -219,9 +219,18 @@ function menu() {
 		buttons[i].update();
 	}
 
+	let w = width/2;
+	let h = height/2 + height/4;
 	imageMode(CENTER);
-	image((soundOption ? soundOn : soundOff), width/2, height/2 + height/4);
+	image((soundOption ? soundOn : soundOff), w, h);
 	imageMode(CORNER);
+
+	if (mouseX > w - 25 && mouseX < w + 25 && mouseY > h - 25 && mouseY < h + 25) {
+		mouse = HAND;
+		if (clicked) {
+			soundOption = !soundOption;
+		}
+	}
 }
 
 function story() {
