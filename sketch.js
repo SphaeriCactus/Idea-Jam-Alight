@@ -10,6 +10,7 @@ let storyText, helpText;
 let opacity, opacityIncrement;
 
 let playerImg, flames;
+let jump, hit;
 
 let spawnPoints = [];
 let obstacleTypes = [];
@@ -43,6 +44,8 @@ function preload() {
 	tv = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/tv.png");
 	wardrobe = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/wardrobe.png");
 	lamp = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lamp.png");
+
+	jump = loadSound("https://sphaericactus.github.io/Idea-Jam-Alight/assets/jump.m4a")
 }
 
 function setup() {

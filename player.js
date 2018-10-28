@@ -26,6 +26,7 @@ Player.prototype.update = function() {
 	if ((keys[UP_ARROW] || keys[87]) && this.canJump) {
 		this.jumping = true;
 		this.gravity = 2;
+		jump.play();
 	}
 
 	this.canJump = false;
