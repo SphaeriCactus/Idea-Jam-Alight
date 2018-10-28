@@ -45,7 +45,7 @@ function preload() {
 	wardrobe = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/wardrobe.png");
 	lamp = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/lamp.png");
 
-	jump = loadSound("assets/jump.m4a");
+	jump = loadSound("https://sphaericactus.github.io/Idea-Jam-Alight/assets/jump.wav");
 }
 
 function setup() {
