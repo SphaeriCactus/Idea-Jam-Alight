@@ -10,7 +10,7 @@ let storyText, helpText;
 let opacity, opacityIncrement;
 
 let playerImg, flames;
-let jump, hit;
+let jump, hit, soundOption, soundOn, soundOff;
 
 let spawnPoints = [];
 let obstacleTypes = [];
@@ -47,6 +47,8 @@ function preload() {
 
 	jump = loadSound("https://sphaericactus.github.io/Idea-Jam-Alight/assets/jump.mp3");
 	hit = loadSound("https://sphaericactus.github.io/Idea-Jam-Alight/assets/hit.mp3");
+	soundOn = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/soundon.png");
+	soundOff = loadImage("https://sphaericactus.github.io/Idea-Jam-Alight/assets/soundoff.png");
 }
 
 function setup() {
@@ -57,6 +59,8 @@ function setup() {
 
 	opacity = 0;
 	opacityIncrement = 10;
+
+	soundOption = true;
 
 	flameX = 0;
 	flameX2 = width;
@@ -214,6 +218,10 @@ function menu() {
 		buttons[i].draw();
 		buttons[i].update();
 	}
+
+	imageMode(CENTER);
+	image((soundOption ? soundOn : soundOff), width/2, height/2 + height/4);
+	imageMode(CORNER);
 }
 
 function story() {
@@ -346,7 +354,9 @@ function game() {
 		o.update();
 
 		if (player.collide(o)) {
-			hit.play();
+			if (soundOption) {
+				hit.play();
+			}
 			player.health -= o.damage;
 			clouds.push([1, o.x, o.y, true]);
 			obstacles.splice(i, 1);
