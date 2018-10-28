@@ -313,8 +313,9 @@ function gameOver() {
 
 	noStroke();
 	fill(51, 10, 4);
+	textSize(30);
+	text("Good job! (although your house still burnt down...)", width/2, height/2 - height/10);
 	textSize(35);
-	text("Good job!", width/2, height/2 - height/10);
 	text("You got to a difficulty level of " + levels + ",\nwith a score of " + score + "!", width/2, height/2);
 
 	for (let x = 0; x < levels; x ++) {
@@ -371,13 +372,13 @@ function game() {
 		} else if (levels == 5) {
 			updateTypes(1, 2); // index, ammountToAdd
 		} else if (levels == 6) {
-			interval = 0.15;
+			interval = 0.1;
 		} else if (levels == 7) {
 			updateTypes(2, 2); // index, ammountToAdd
 		} else if (levels == 8) {
-			interval = 0.1;
+			interval = 0.5;
 		} else if (levels == 9) {
-			updateTypes(1, 1); // index, ammountToAdd
+			updateTypes(2, 3); // index, ammountToAdd
 		}
 
 		if (levels <= 9) {
